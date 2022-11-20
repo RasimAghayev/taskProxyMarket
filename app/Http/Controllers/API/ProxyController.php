@@ -48,6 +48,58 @@ class ProxyController extends Controller
         return new ProxyCollection($proxies->paginate($pagePaginate)->appends($request->query()));
     }
 
+    public function list(Request $request)
+    {
+        $proxies=$this->index($request);
+        $data=[];
+        $csvFormat = strtolower($request->csvFormat);
+        $formats=['ip','ip:port','ip@login:password','ip:port@login:password'];
+        if(in_array($csvFormat,$formats)){
+            $allProxies = collect($proxies)->map(callback: function ($proxy) use($csvFormat,$formats) {
+                if($csvFormat){
+                    if(Str::contains($csvFormat, 'ip')){
+                        $newdata=$proxy->ip;
+                        if(Str::contains($csvFormat, 'port')){
+                            $newdata.=':'.$proxy->port;
+                        }
+                        if(Str::contains($csvFormat, 'login')){
+                            $newdata.='@'.$proxy->login.':'.$proxy->password;
+                        }
+                    }
+                    $data=[$newdata];
+                }else{
+                    $data=[
+                        'proxyIP'         => $proxy->ip,
+                        'proxyPort'       => $proxy->port,
+                        'proxyLogin'      => $proxy->login,
+                        'proxyPassword'   => $proxy->password,
+                    ];
+                }
+                return $data;
+            });
+            return $allProxies->all();
+        }else{
+            return $this->sendError([], 'Export format criteria not found', Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+    }
+    public function export(Request $request)
+    {
+        $productItemNumbers = $this->list($request);
+        $local = Storage::disk('local');
+        $storage = Storage::disk('local')->url('/');
+        $exportFileName     = sprintf('proxies-%s.csv', strtotime("now"));
+        $csvFile = tmpfile();
+        $csvPath = stream_get_meta_data($csvFile)['uri'];
+        $fd = fopen($csvPath, 'w');
+        fputcsv($fd, ['Lists']);
+        foreach ($productItemNumbers as $item) {
+            fputcsv($fd, $item, ',', '"', "\\");
+        }
+        rewind($fd);
+        fclose($fd);
+        $symlink = 'public/docs/user_docs/'.$this->user->id.'/';
+        return Storage::download($local->putFileAs('', $csvPath, $exportFileName));
+    }
 
     /**
      * Store a newly created resource in storage.
