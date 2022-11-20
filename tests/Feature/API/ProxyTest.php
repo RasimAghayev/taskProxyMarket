@@ -94,7 +94,7 @@ class ProxyTest extends TestCase
         $id=(int) $id['data']->id;
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '. $token,
-        ])->json('GET','api/v1/proxies/{$id}');
+        ])->json('GET','api/v1/proxies/'.$id);
 
         //Write the response in laravel.log
         \Log::info(1, [$response->getContent()]);
@@ -114,7 +114,7 @@ class ProxyTest extends TestCase
         $id=(int) $id['data']->id;
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '. $token,
-        ])->json('PUT','api/v1/proxies/{$id}',[
+        ])->json('PUT','api/v1/proxies/'.$id,[
             'name' => 'Test category 2',
             'description' => 'Test category 2',
             'parent_id' => 2,
@@ -137,7 +137,7 @@ class ProxyTest extends TestCase
         $id=(int) $id['data']->id;
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '. $token,
-        ])->json('DELETE','api/v1/proxies/{$id}');
+        ])->json('DELETE','api/v1/proxies/'.$id);
 
         //Write the response in laravel.log
         \Log::info(1, [$response->getContent()]);
