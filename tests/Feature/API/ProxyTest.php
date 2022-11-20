@@ -112,7 +112,6 @@ class ProxyTest extends TestCase
         $token = $this->authenticate();
         $id = (array) json_decode($this->test_create_proxy());
         $id=(int) $id['data']->id;
-        dd($id);
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '. $token,
         ])->json('PUT','api/v1/proxies/{$id}',[
