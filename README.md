@@ -329,3 +329,40 @@ Method: GET
     "paginate": 5
 }
 ```
+
+Note: paginate =[5,10,15,25,50,'All']
+
+## List data
+
+CodePath: \App\Filters\API\ProxyFilters & \App\Http\Controllers\API\ProxyController::list
+
+Method: GET
+```json
+{
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjY4OTc2MDIxLCJleHAiOjE2Njg5Nzk2MjEsIm5iZiI6MTY2ODk3NjAyMSwianRpIjoiek5EdXdPdkxIdVgzVUluTiIsInN1YiI6IjE3NSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.IvtMGEBbNpLYen2cQTFvvs5yNEH5cI9grHQXyFmiIio",
+    "proxyIP": "205.3.70.72",
+    "proxyPort": 47893,
+    "proxyLogin": "ole03",
+    "proxyPassword": "@}|,8/$8qX<2=Z~uCtPp@KEs\"$!?6`^;|^if<",
+    "paginate": 5
+}
+```
+
+## export data
+
+CodePath: \App\Filters\API\ProxyFilters & \App\Http\Controllers\API\ProxyController::export
+
+Method: GET
+```json
+{
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjY4OTc2MDIxLCJleHAiOjE2Njg5Nzk2MjEsIm5iZiI6MTY2ODk3NjAyMSwianRpIjoiek5EdXdPdkxIdVgzVUluTiIsInN1YiI6IjE3NSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.IvtMGEBbNpLYen2cQTFvvs5yNEH5cI9grHQXyFmiIio",
+    "proxyIP": "205.3.70.72",
+    "proxyPort": 47893,
+    "proxyLogin": "ole03",
+    "proxyPassword": "@}|,8/$8qX<2=Z~uCtPp@KEs\"$!?6`^;|^if<",
+    "paginate": 5,
+    "format": 'ip:port'
+}
+```
+
+Note: format =['ip','ip:port','ip@login:password','ip:port@login:password']
