@@ -62,6 +62,7 @@ Method: GET
     "message": "User has been logged in."
 }
 ```
+
 ## getUser API
 
 CodePath: \App\Http\Controllers\API\ApiUserController::getUser
@@ -112,6 +113,7 @@ Method: GET
     "message": "User has been logged out."
 }
 ```
+
 
 
 # Proxy controller
@@ -327,4 +329,3 @@ Method: GET
     "paginate": 5
 }
 ```
-
