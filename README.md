@@ -1,4 +1,7 @@
 # Task
+
+![Views](https://hits.sh/github.com/RasimAghayev/taskProxyMarket.svg?label=views&color=0e75b6)
+
 Нужно сделать API на Laravel
 1. Авторизация через JWT
 2. Добавить endpoint POST /proxies/list, доступный только для авторизованных пользователей. 
